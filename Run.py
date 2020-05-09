@@ -22,24 +22,21 @@ try:
 		break
 	    user = getUser(line)
 	    message = getMessage(line)
-	    print(message)
 	    print user + " typed :" + message
 	    if "You Suck" in message:
 		sendMessage(s, "No, you suck!")
 		break
-	    print(message)
 	    if "left\r" == message:
 		print("MOOOOVE left")
 		stepper.moveLeft()
 		break
-	    print(message)
 	    if "right\r" == message:
 		print("MOOOOOVE right")
 		stepper.moveRight()
 		break
 	    if "up\r" == message:
 		print("MOOOOVE up")
-		stepper.moreUp()
+		stepper.moveUp()
 		break
 	    print(message)
 	    if "down\r" == message:
