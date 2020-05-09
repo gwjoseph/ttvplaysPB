@@ -1,6 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 import sys
+import Settings as settings
 
 
 xAxisMotorPins = (12, 16, 18, 22)    # GPIO pins from the Rpi
@@ -10,7 +11,7 @@ yAxisMotorPins = (31,33,35,37)
 yAxisSeqCounter = 0
 
 
-seq = [[1,0,0,0],
+seq =  [[1,0,0,0],
         [1,1,0,0],
         [0,1,0,0],
         [0,1,1,0],
@@ -81,19 +82,19 @@ def moveSteps(direction, ms, steps, axis):
 #TODO:  see about having the motors actually turn 1 degree and not 
 # method to make the x axis motor turn right        
 def moveRight():
-   moveSteps(1,3,11,"x") #11.3777 is a single degree
+   moveSteps(-1,3,settings.MOTOR_STEPS,"x") #11.3777 is a single degree
     
 # method to make the x axis motor turn left  
 def moveLeft():
-    moveSteps(-1,3,11,"x") #11.3777 is a single degree
+    moveSteps(1,3,settings.MOTOR_STEPS,"x") #11.3777 is a single degree
 
 # method to make the y axis motor turn up  
 def moveUp():
-   moveSteps(1,3,11,"y") #11.3777 is a single degree
+   moveSteps(1,3,settings.MOTOR_STEPS,"y") #11.3777 is a single degree
 
 # method to make the y axis motor turn down  
 def moveDown():
-    moveSteps(-1,3,11,"y") #11.3777 is a single degree
+    moveSteps(-1,3,settings.MOTOR_STEPS,"y") #11.3777 is a single degree
         
 # function used to stop the x axis motor
 def stopXAxisMotor():
@@ -117,7 +118,7 @@ def loop():
             moveUp()
         time.sleep(0.5)
 
-# method that will listen for terminal input
+# method that will listen for terminal input this is used for testing motors locally and debugging
 def userInputLoop():
     while True:
         text = raw_input()
@@ -129,13 +130,14 @@ def userInputLoop():
 def destroy():
     GPIO.cleanup()  # Release resource
     
-if __name__ == '__main__': # Program entrance
-     print ('Program is starting...')
-     setup()
-     try:
-        loop() 
-        #userInputLoop()
-     except KeyboardInterrupt:  # Press ctrl-c to end the program.
-         print ('exiting...')
-     finally:
-        destroy()
+# Leaving this main method here incase you need to run the motors locally for debugging
+#  if __name__ == '__main__': # Program entrance
+     #  print ('Program is starting...')
+     #  setup()
+     #  try:
+        #  loop() 
+        #  #userInputLoop()
+     #  except KeyboardInterrupt:  # Press ctrl-c to end the program.
+         #  print ('exiting...')
+     #  finally:
+        #  destroy()
