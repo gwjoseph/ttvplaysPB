@@ -138,4 +138,4 @@ if __name__ == '__main__': # Program entrance
      except KeyboardInterrupt:  # Press ctrl-c to end the program.
          print ('exiting...')
      finally:
-        destroy()
+        destroy() 
